@@ -1,0 +1,305 @@
+BACKUP ~cdportraits/backup~ // location to store files for
+SUPPORT ~http://gibberlings3.net/forums/index.php?showforum=28~ // URL displayed if install fails
+
+ALWAYS
+
+  ACTION_IF NOT VARIABLE_IS_SET always THEN BEGIN // check to make this happen only once per install
+
+    ACTION_IF !GAME_IS ~soa tob bgee bg2ee eet bgt tutu tutu_totsc bg1 totsc~ THEN BEGIN FAIL @6 END // only for bg/bg2 and variants thereof
+
+    ACTION_IF ((FILE_EXISTS ~dlc/sod-dlc.zip~) OR (FILE_EXISTS ~sod-dlc.zip~)) THEN BEGIN FAIL @0 END // Modmerge check
+    
+	OUTER_SET always = 1
+	
+    DEFINE_ACTION_FUNCTION cd_override_portrait
+      INT_VAR 
+	    game = 0
+	    debug = 0
+      STR_VAR 
+	    npc = ""
+	    portrait = ""
+	  RET 
+	    success	
+    BEGIN
+	
+	  OUTER_SET success = 0
+	  ACTION_IF FILE_EXISTS_IN_GAME ~%portrait%.bmp~ THEN BEGIN
+	
+	    COPY_EXISTING ~%portrait%.bmp~ ~override~
+	      READ_LONG 0x16 height
+	      BUT_ONLY
+	  
+        ACTION_IF FILE_EXISTS ~cdportraits/bmp/%npc%_%game%_%height%.bmp~ THEN BEGIN	
+        
+          COPY ~cdportraits/bmp/%npc%_%game%_%height%.bmp~ ~override/%portrait%.bmp~
+          OUTER_SET success = 1
+	  
+        END ELSE BEGIN
+
+          WARN @1
+      
+        END // end local portrait check to copy/warn
+      
+	  END ELSE BEGIN
+	  
+	    ACTION_IF debug BEGIN PRINT ~%portrait%.bmp not found~ END
+	  	  
+      END // end portrait check
+	  
+    END	// end function define
+
+  END // end var always check
+
+END // end always
+
+ASK_EVERY_COMPONENT
+
+VERSION ~v1~
+
+README ~cdportraits/languages/%LANGUAGE%/readme-cdportraits.html~ ~cdportraits/readme-cdportraits.html~
+
+LANGUAGE ~English~ ~english~ ~cdportraits/languages/english/setup.tra~
+
+/////\\\\\/////\\\\\/////\\\\\/////\\\\\/////\\\\\/////\\\\\
+/////\\\\\/////\\\\\/////\\\\\/////\\\\\/////\\\\\/////\\\\\
+/////                                                  \\\\\
+///// Edwin                                            \\\\\
+/////                                                  \\\\\
+/////\\\\\/////\\\\\/////\\\\\/////\\\\\/////\\\\\/////\\\\\
+/////\\\\\/////\\\\\/////\\\\\/////\\\\\/////\\\\\/////\\\\\
+
+/////                                                  \\\\\
+///// bg portrait                                      \\\\\
+/////                                                  \\\\\
+
+BEGIN @3 DESIGNATED 10
+SUBCOMPONENT @100
+
+OUTER_SET replacements = 0
+ACTION_FOR_EACH file IN _dwinl _dwins edwing edwinl edwinm edwins nedwinl nedwinm nedwins BEGIN // edwin
+
+  LAF cd_override_portrait INT_VAR game = 0 STR_VAR npc = edwin portrait = EVAL ~%file%~ RET success END
+  OUTER_SET replacements += success
+
+END  
+
+PRINT @2
+
+/////                                                  \\\\\
+///// bg2 portrait                                     \\\\\
+/////                                                  \\\\\
+
+BEGIN @5 DESIGNATED 11
+SUBCOMPONENT @100
+
+OUTER_SET replacements = 0
+ACTION_FOR_EACH file IN _dwinl _dwins edwing edwinl edwinm edwins nedwinl nedwinm nedwins BEGIN // edwin
+
+  LAF cd_override_portrait INT_VAR game = 2 STR_VAR npc = edwin portrait = EVAL ~%file%~ RET success END
+  OUTER_SET replacements += success
+
+END  
+
+PRINT @2
+
+/////\\\\\/////\\\\\/////\\\\\/////\\\\\/////\\\\\/////\\\\\
+/////\\\\\/////\\\\\/////\\\\\/////\\\\\/////\\\\\/////\\\\\
+/////                                                  \\\\\
+///// Imoen                                            \\\\\
+/////                                                  \\\\\
+/////\\\\\/////\\\\\/////\\\\\/////\\\\\/////\\\\\/////\\\\\
+/////\\\\\/////\\\\\/////\\\\\/////\\\\\/////\\\\\/////\\\\\
+
+/////                                                  \\\\\
+///// bg portrait                                      \\\\\
+/////                                                  \\\\\
+
+BEGIN @3 DESIGNATED 20
+SUBCOMPONENT @200
+
+OUTER_SET replacements = 0
+ACTION_FOR_EACH file IN _moenl _moens imoeng imoenl imoenm imoens nimoenl nimoenm nimoens bdimoenl bdimoenm bdimoens BEGIN // imoen
+
+  LAF cd_override_portrait INT_VAR game = 0 STR_VAR npc = imoen portrait = EVAL ~%file%~ RET success END
+  OUTER_SET replacements += success
+
+END  
+
+PRINT @2
+
+/////                                                  \\\\\
+///// bg2 portrait                                     \\\\\
+/////                                                  \\\\\
+
+BEGIN @5 DESIGNATED 21
+SUBCOMPONENT @200
+
+OUTER_SET replacements = 0
+ACTION_FOR_EACH file IN _moenl _moens imoeng imoenl imoenm imoens nimoenl nimoenm nimoens bdimoenl bdimoenm bdimoens BEGIN // imoen
+
+  LAF cd_override_portrait INT_VAR game = 2 STR_VAR npc = imoen portrait = EVAL ~%file%~ RET success END
+  OUTER_SET replacements += success
+
+END  
+
+PRINT @2
+
+/////                                                  \\\\\
+///// sod portrait                                     \\\\\
+/////                                                  \\\\\
+
+BEGIN @4 DESIGNATED 22
+SUBCOMPONENT @200
+
+OUTER_SET replacements = 0
+ACTION_FOR_EACH file IN _moenl _moens imoeng imoenl imoenm imoens nimoenl nimoenm nimoens bdimoenl bdimoenm bdimoens BEGIN // imoen
+
+  LAF cd_override_portrait INT_VAR game = 1 STR_VAR npc = imoen portrait = EVAL ~%file%~ RET success END
+  OUTER_SET replacements += success
+
+END  
+
+PRINT @2
+
+/////\\\\\/////\\\\\/////\\\\\/////\\\\\/////\\\\\/////\\\\\
+/////\\\\\/////\\\\\/////\\\\\/////\\\\\/////\\\\\/////\\\\\
+/////                                                  \\\\\
+///// Jaheira                                          \\\\\
+/////                                                  \\\\\
+/////\\\\\/////\\\\\/////\\\\\/////\\\\\/////\\\\\/////\\\\\
+/////\\\\\/////\\\\\/////\\\\\/////\\\\\/////\\\\\/////\\\\\
+
+/////                                                  \\\\\
+///// bg portrait                                      \\\\\
+/////                                                  \\\\\
+
+BEGIN @3 DESIGNATED 30
+SUBCOMPONENT @300
+
+OUTER_SET replacements = 0
+ACTION_FOR_EACH file IN _aheiral _aheiras jaheirag jaheiral jaheiram jaheiras njaheirl njaheirm njaheirs BEGIN // jaheira
+
+  LAF cd_override_portrait INT_VAR game = 0 STR_VAR npc = jaheira portrait = EVAL ~%file%~ RET success END
+  OUTER_SET replacements += success
+
+END  
+
+PRINT @2
+
+/////                                                  \\\\\
+///// bg2 portrait                                     \\\\\
+/////                                                  \\\\\
+
+BEGIN @5 DESIGNATED 31
+SUBCOMPONENT @300
+
+OUTER_SET replacements = 0
+ACTION_FOR_EACH file IN _aheiral _aheiras jaheirag jaheiral jaheiram jaheiras njaheirl njaheirm njaheirs BEGIN // jaheira
+
+  LAF cd_override_portrait INT_VAR game = 2 STR_VAR npc = jaheira portrait = EVAL ~%file%~ RET success END
+  OUTER_SET replacements += success
+
+END  
+
+PRINT @2
+
+/////\\\\\/////\\\\\/////\\\\\/////\\\\\/////\\\\\/////\\\\\
+/////\\\\\/////\\\\\/////\\\\\/////\\\\\/////\\\\\/////\\\\\
+/////                                                  \\\\\
+///// Minsc                                            \\\\\
+/////                                                  \\\\\
+/////\\\\\/////\\\\\/////\\\\\/////\\\\\/////\\\\\/////\\\\\
+/////\\\\\/////\\\\\/////\\\\\/////\\\\\/////\\\\\/////\\\\\
+
+/////                                                  \\\\\
+///// bg portrait                                      \\\\\
+/////                                                  \\\\\
+
+BEGIN @3 DESIGNATED 40
+SUBCOMPONENT @400
+
+OUTER_SET replacements = 0
+ACTION_FOR_EACH file IN _inscl _inscs minscg minscl minscm minscs nminscl nminscm nminscs BEGIN // minsc
+
+  LAF cd_override_portrait INT_VAR game = 0 STR_VAR npc = minsc portrait = EVAL ~%file%~ RET success END
+  OUTER_SET replacements += success
+
+END  
+
+PRINT @2
+
+/////                                                  \\\\\
+///// bg2 portrait                                     \\\\\
+/////                                                  \\\\\
+
+BEGIN @5 DESIGNATED 41
+SUBCOMPONENT @400
+
+OUTER_SET replacements = 0
+ACTION_FOR_EACH file IN _inscl _inscs minscg minscl minscm minscs nminscl nminscm nminscs BEGIN // minsc
+
+  LAF cd_override_portrait INT_VAR game = 2 STR_VAR npc = minsc portrait = EVAL ~%file%~ RET success END
+  OUTER_SET replacements += success
+
+END  
+
+PRINT @2
+
+/////\\\\\/////\\\\\/////\\\\\/////\\\\\/////\\\\\/////\\\\\
+/////\\\\\/////\\\\\/////\\\\\/////\\\\\/////\\\\\/////\\\\\
+/////                                                  \\\\\
+///// Viconia                                          \\\\\
+/////                                                  \\\\\
+/////\\\\\/////\\\\\/////\\\\\/////\\\\\/////\\\\\/////\\\\\
+/////\\\\\/////\\\\\/////\\\\\/////\\\\\/////\\\\\/////\\\\\
+
+/////                                                  \\\\\
+///// bg portrait                                      \\\\\
+/////                                                  \\\\\
+
+BEGIN @3 DESIGNATED 50
+SUBCOMPONENT @500
+
+OUTER_SET replacements = 0
+ACTION_FOR_EACH file IN _iconial _iconias viconiag viconial viconiam viconias nviconl nviconm nvicons bdviconl bdviconm bdvicons BEGIN // viconia
+
+  LAF cd_override_portrait INT_VAR game = 0 STR_VAR npc = viconia portrait = EVAL ~%file%~ RET success END
+  OUTER_SET replacements += success
+
+END  
+
+PRINT @2
+
+/////                                                  \\\\\
+///// bg2 portrait                                     \\\\\
+/////                                                  \\\\\
+
+BEGIN @5 DESIGNATED 51
+SUBCOMPONENT @500
+
+OUTER_SET replacements = 0
+ACTION_FOR_EACH file IN _iconial _iconias viconiag viconial viconiam viconias nviconl nviconm nvicons bdviconl bdviconm bdvicons BEGIN // viconia
+
+  LAF cd_override_portrait INT_VAR game = 2 STR_VAR npc = viconia portrait = EVAL ~%file%~ RET success END
+  OUTER_SET replacements += success
+
+END  
+
+PRINT @2
+
+/////                                                  \\\\\
+///// sod portrait                                     \\\\\
+/////                                                  \\\\\
+
+BEGIN @4 DESIGNATED 52
+SUBCOMPONENT @500
+
+OUTER_SET replacements = 0
+ACTION_FOR_EACH file IN _iconial _iconias viconiag viconial viconiam viconias nviconl nviconm nvicons bdviconl bdviconm bdvicons BEGIN // viconia
+
+  LAF cd_override_portrait INT_VAR game = 1 STR_VAR npc = viconia portrait = EVAL ~%file%~ RET success END
+  OUTER_SET replacements += success
+
+END  
+
+PRINT @2

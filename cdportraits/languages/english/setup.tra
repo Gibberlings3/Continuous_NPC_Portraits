@@ -1,0 +1,12 @@
+@0 = ~Modmerge is required before mods can be installed on this game. Check the readme for more information and a link to download Modmerge.~
+@1 = ~%portrait%.bmp is an unknown size and will not be overridden.~
+@2 = ~Replaced %replacements% portrait(s) of this NPC.~
+@3 = ~Use BG portrait~
+@4 = ~Use SoD portrait~
+@5 = ~Use BG2 portrait~
+@6 = ~Only available for the BG series.~
+@100 = ~Edwin~
+@200 = ~Imoen~
+@300 = ~Jaheira~
+@400 = ~Minsc~
+@500 = ~Viconia~
