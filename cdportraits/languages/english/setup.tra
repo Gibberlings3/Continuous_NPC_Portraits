@@ -1,10 +1,13 @@
-@0 = ~Modmerge is required before mods can be installed on this game. Check the readme for more information and a link to download Modmerge.~
+@0 = ~DLC Merger is required before mods can be installed on this game. Check the readme for more information and a link to download DLC Merger.~
 @1 = ~%portrait%.bmp is an unknown size and will not be overridden.~
 @2 = ~Replaced %replacements% portrait(s) of this NPC.~
 @3 = ~Use BG portrait~
 @4 = ~Use SoD portrait~
 @5 = ~Use BG2 portrait~
 @6 = ~Only available for the BG series.~
+@7 = ~Use Lava's alternative SoD portrait~
+@8 = ~Only replace Viconia's SoD portrait with Lava's alternative~
+@9 = ~Only available for Siege of Dragonspear.~
 @100 = ~Edwin~
 @200 = ~Imoen~
 @300 = ~Jaheira~

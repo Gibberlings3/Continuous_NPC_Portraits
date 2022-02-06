@@ -1,5 +1,5 @@
 BACKUP ~cdportraits/backup~ // location to store files for
-SUPPORT ~http://gibberlings3.net/forums/index.php?showforum=28~ // URL displayed if install fails
+SUPPORT ~https://www.gibberlings3.net/forums/forum/28-miscellaneous-released-mods/~ // URL displayed if install fails
 
 ALWAYS
 
@@ -54,7 +54,7 @@ END // end always
 
 ASK_EVERY_COMPONENT
 
-VERSION ~v1~
+VERSION ~v2~
 
 README ~cdportraits/languages/%LANGUAGE%/readme-cdportraits.html~ ~cdportraits/readme-cdportraits.html~
 
@@ -74,6 +74,7 @@ LANGUAGE ~English~ ~english~ ~cdportraits/languages/english/setup.tra~
 
 BEGIN @3 DESIGNATED 10
 SUBCOMPONENT @100
+LABEL ~cd_continuous_npc_portraits_edwin_bg~
 
 OUTER_SET replacements = 0
 ACTION_FOR_EACH file IN _dwinl _dwins edwing edwinl edwinm edwins nedwinl nedwinm nedwins BEGIN // edwin
@@ -91,6 +92,7 @@ PRINT @2
 
 BEGIN @5 DESIGNATED 11
 SUBCOMPONENT @100
+LABEL ~cd_continuous_npc_portraits_edwin_bg2~
 
 OUTER_SET replacements = 0
 ACTION_FOR_EACH file IN _dwinl _dwins edwing edwinl edwinm edwins nedwinl nedwinm nedwins BEGIN // edwin
@@ -116,6 +118,7 @@ PRINT @2
 
 BEGIN @3 DESIGNATED 20
 SUBCOMPONENT @200
+LABEL ~cd_continuous_npc_portraits_imoen_bg~
 
 OUTER_SET replacements = 0
 ACTION_FOR_EACH file IN _moenl _moens imoeng imoenl imoenm imoens nimoenl nimoenm nimoens bdimoenl bdimoenm bdimoens BEGIN // imoen
@@ -133,6 +136,7 @@ PRINT @2
 
 BEGIN @5 DESIGNATED 21
 SUBCOMPONENT @200
+LABEL ~cd_continuous_npc_portraits_imoen_bg2~
 
 OUTER_SET replacements = 0
 ACTION_FOR_EACH file IN _moenl _moens imoeng imoenl imoenm imoens nimoenl nimoenm nimoens bdimoenl bdimoenm bdimoens BEGIN // imoen
@@ -150,6 +154,7 @@ PRINT @2
 
 BEGIN @4 DESIGNATED 22
 SUBCOMPONENT @200
+LABEL ~cd_continuous_npc_portraits_imoen_sod~
 
 OUTER_SET replacements = 0
 ACTION_FOR_EACH file IN _moenl _moens imoeng imoenl imoenm imoens nimoenl nimoenm nimoens bdimoenl bdimoenm bdimoens BEGIN // imoen
@@ -175,6 +180,7 @@ PRINT @2
 
 BEGIN @3 DESIGNATED 30
 SUBCOMPONENT @300
+LABEL ~cd_continuous_npc_portraits_jaheira_bg~
 
 OUTER_SET replacements = 0
 ACTION_FOR_EACH file IN _aheiral _aheiras jaheirag jaheiral jaheiram jaheiras njaheirl njaheirm njaheirs BEGIN // jaheira
@@ -192,6 +198,7 @@ PRINT @2
 
 BEGIN @5 DESIGNATED 31
 SUBCOMPONENT @300
+LABEL ~cd_continuous_npc_portraits_jaheira_bg2~
 
 OUTER_SET replacements = 0
 ACTION_FOR_EACH file IN _aheiral _aheiras jaheirag jaheiral jaheiram jaheiras njaheirl njaheirm njaheirs BEGIN // jaheira
@@ -217,6 +224,7 @@ PRINT @2
 
 BEGIN @3 DESIGNATED 40
 SUBCOMPONENT @400
+LABEL ~cd_continuous_npc_portraits_minsc_bg~
 
 OUTER_SET replacements = 0
 ACTION_FOR_EACH file IN _inscl _inscs minscg minscl minscm minscs nminscl nminscm nminscs BEGIN // minsc
@@ -234,6 +242,7 @@ PRINT @2
 
 BEGIN @5 DESIGNATED 41
 SUBCOMPONENT @400
+LABEL ~cd_continuous_npc_portraits_minsc_bg2~
 
 OUTER_SET replacements = 0
 ACTION_FOR_EACH file IN _inscl _inscs minscg minscl minscm minscs nminscl nminscm nminscs BEGIN // minsc
@@ -259,6 +268,7 @@ PRINT @2
 
 BEGIN @3 DESIGNATED 50
 SUBCOMPONENT @500
+LABEL ~cd_continuous_npc_portraits_viconia_bg~
 
 OUTER_SET replacements = 0
 ACTION_FOR_EACH file IN _iconial _iconias viconiag viconial viconiam viconias nviconl nviconm nvicons bdviconl bdviconm bdvicons BEGIN // viconia
@@ -276,6 +286,7 @@ PRINT @2
 
 BEGIN @5 DESIGNATED 51
 SUBCOMPONENT @500
+LABEL ~cd_continuous_npc_portraits_viconia_bg2~
 
 OUTER_SET replacements = 0
 ACTION_FOR_EACH file IN _iconial _iconias viconiag viconial viconiam viconias nviconl nviconm nvicons bdviconl bdviconm bdvicons BEGIN // viconia
@@ -293,11 +304,49 @@ PRINT @2
 
 BEGIN @4 DESIGNATED 52
 SUBCOMPONENT @500
+LABEL ~cd_continuous_npc_portraits_viconia_sod~
 
 OUTER_SET replacements = 0
 ACTION_FOR_EACH file IN _iconial _iconias viconiag viconial viconiam viconias nviconl nviconm nvicons bdviconl bdviconm bdvicons BEGIN // viconia
 
   LAF cd_override_portrait INT_VAR game = 1 STR_VAR npc = viconia portrait = EVAL ~%file%~ RET success END
+  OUTER_SET replacements += success
+
+END  
+
+PRINT @2
+
+/////                                                  \\\\\
+///// lava's Sod alternative for all games             \\\\\
+/////                                                  \\\\\
+
+BEGIN @7 DESIGNATED 53
+SUBCOMPONENT @500
+LABEL ~cd_continuous_npc_portraits_viconia_sod_alt_all~
+
+OUTER_SET replacements = 0
+ACTION_FOR_EACH file IN _iconial _iconias viconiag viconial viconiam viconias nviconl nviconm nvicons bdviconl bdviconm bdvicons BEGIN // viconia
+
+  LAF cd_override_portrait INT_VAR game = 3 STR_VAR npc = viconia portrait = EVAL ~%file%~ RET success END
+  OUTER_SET replacements += success
+
+END  
+
+PRINT @2
+
+/////                                                  \\\\\
+///// use lava's sod alternative only for SoD          \\\\\
+/////                                                  \\\\\
+
+BEGIN @8 DESIGNATED 54
+SUBCOMPONENT @500
+REQUIRE_PREDICATE GAME_INCLUDES ~sod~ @9
+LABEL ~cd_continuous_npc_portraits_viconia_sod_alt_limited~
+
+OUTER_SET replacements = 0
+ACTION_FOR_EACH file IN bdviconl bdviconm bdvicons BEGIN // viconia
+
+  LAF cd_override_portrait INT_VAR game = 3 STR_VAR npc = viconia portrait = EVAL ~%file%~ RET success END
   OUTER_SET replacements += success
 
 END  
