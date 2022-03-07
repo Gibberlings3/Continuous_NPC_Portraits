@@ -17,7 +17,7 @@ There are five NPCs in the Baldur's Gate series who have multiple official portr
 
 ## 
 
-:page_facing_up: [Read the mod's readme](https://gibberlings3.github.io/Documentation/readmes/readme-cdportraits.html) | [Français]https://gibberlings3.github.io/Documentation/readmes/readme-cdportraits-french.html)
+:page_facing_up: [Read the mod's readme](https://gibberlings3.github.io/Documentation/readmes/readme-cdportraits.html) | [Fran%C3%A7ais](https://gibberlings3.github.io/Documentation/readmes/readme-cdportraits-french.html)
 
 ## 
 
