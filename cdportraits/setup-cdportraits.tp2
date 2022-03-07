@@ -1,4 +1,4 @@
-BACKUP ~cdportraits/backup~ // location to store files for
+BACKUP ~weidu_external/cdportraits/backup~ // location to store files for
 SUPPORT ~https://www.gibberlings3.net/forums/forum/28-miscellaneous-released-mods/~ // URL displayed if install fails
 
 ALWAYS
@@ -59,7 +59,8 @@ VERSION ~v3~
 README ~cdportraits/readme-cdportraits-%LANGUAGE%.html~ ~cdportraits/readme-cdportraits.html~
 
 LANGUAGE ~English~  ~english~ ~cdportraits/languages/english/setup.tra~
-LANGUAGE ~Francais~ ~french~  ~cdportraits/languages/french/setup.tra~
+LANGUAGE ~Francais~ ~french~  ~cdportraits/languages/english/setup.tra~
+                              ~cdportraits/languages/french/setup.tra~
 
 /////\\\\\/////\\\\\/////\\\\\/////\\\\\/////\\\\\/////\\\\\
 /////\\\\\/////\\\\\/////\\\\\/////\\\\\/////\\\\\/////\\\\\
@@ -161,6 +162,43 @@ OUTER_SET replacements = 0
 ACTION_FOR_EACH file IN _moenl _moens imoeng imoenl imoenm imoens nimoenl nimoenm nimoens bdimoenl bdimoenm bdimoens BEGIN // imoen
 
   LAF cd_override_portrait INT_VAR game = 1 STR_VAR npc = imoen portrait = EVAL ~%file%~ RET success END
+  OUTER_SET replacements += success
+
+END  
+
+PRINT @2
+
+/////                                                  \\\\\
+///// lava's Sod alternative for all games             \\\\\
+/////                                                  \\\\\
+
+BEGIN @7 DESIGNATED 23
+SUBCOMPONENT @200
+LABEL ~cd_continuous_npc_portraits_imoen_sod_alt_all~
+
+OUTER_SET replacements = 0
+ACTION_FOR_EACH file IN _moenl _moens imoeng imoenl imoenm imoens nimoenl nimoenm nimoens bdimoenl bdimoenm bdimoens BEGIN // imoen
+
+  LAF cd_override_portrait INT_VAR game = 3 STR_VAR npc = imoen portrait = EVAL ~%file%~ RET success END
+  OUTER_SET replacements += success
+
+END  
+
+PRINT @2
+
+/////                                                  \\\\\
+///// use lava's sod alternative only for SoD          \\\\\
+/////                                                  \\\\\
+
+BEGIN @8 DESIGNATED 24
+SUBCOMPONENT @200
+REQUIRE_PREDICATE GAME_INCLUDES ~sod~ @9
+LABEL ~cd_continuous_npc_portraits_imoen_sod_alt_limited~
+
+OUTER_SET replacements = 0
+ACTION_FOR_EACH file IN bdimoenl bdimoenm bdimoens BEGIN // imoen
+
+  LAF cd_override_portrait INT_VAR game = 3 STR_VAR npc = imoen portrait = EVAL ~%file%~ RET success END
   OUTER_SET replacements += success
 
 END  
