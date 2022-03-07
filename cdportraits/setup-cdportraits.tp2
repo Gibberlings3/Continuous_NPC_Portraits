@@ -54,11 +54,12 @@ END // end always
 
 ASK_EVERY_COMPONENT
 
-VERSION ~v2~
+VERSION ~v3~
 
-README ~cdportraits/languages/%LANGUAGE%/readme-cdportraits.html~ ~cdportraits/readme-cdportraits.html~
+README ~cdportraits/readme-cdportraits-%LANGUAGE%.html~ ~cdportraits/readme-cdportraits.html~
 
-LANGUAGE ~English~ ~english~ ~cdportraits/languages/english/setup.tra~
+LANGUAGE ~English~  ~english~ ~cdportraits/languages/english/setup.tra~
+LANGUAGE ~Francais~ ~french~  ~cdportraits/languages/french/setup.tra~
 
 /////\\\\\/////\\\\\/////\\\\\/////\\\\\/////\\\\\/////\\\\\
 /////\\\\\/////\\\\\/////\\\\\/////\\\\\/////\\\\\/////\\\\\
